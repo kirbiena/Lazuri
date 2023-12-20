@@ -2,6 +2,7 @@ from ModuleBase import Module
 from PyGameServices import PyGameServices
 from pubsub import pub
 import numpy as np
+from pathlib import Path
 
 class GUI(Module):
     def __init__(self):
@@ -56,13 +57,13 @@ class GUI(Module):
 
 
         #gripper image assets
-        gripper_half = self.pygame.image.load(r'\GUI Assets\Gripper  Half Open.png')
+        gripper_half = self.pygame.image.load(Path('./GUI Assets/Gripper  Half Open.png'))
         self.gripper_half = self.pygame.transform.scale(gripper_half,(889,500))
-        gripper_closed = self.pygame.image.load(r'.\GUI Assets\Gripper Closed.png')
+        gripper_closed = self.pygame.image.load(Path('./GUI Assets/Gripper Closed.png'))
         self.gripper_closed = self.pygame.transform.scale(gripper_closed,(889,500))
-        gripper_full_opened =self.pygame.image.load(r".\GUI Assets\Gripper fully opened.png")
+        gripper_full_opened =self.pygame.image.load(Path("./GUI Assets/Gripper fully opened.png"))
         self.gripper_full_opened = self.pygame.transform.scale(gripper_full_opened,(889,500))
-        rov_upview = self.pygame.image.load(r".\GUI Assets\otodus_bottom_view.png")
+        rov_upview = self.pygame.image.load(Path("./GUI Assets/otodus_bottom_view.png"))
         self.rov_upview = self.pygame.transform.scale(rov_upview,(400,400))
 
         self.background = self.pygame.Surface(self.mode)
