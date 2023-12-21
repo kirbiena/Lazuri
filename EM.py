@@ -18,10 +18,10 @@ class EM(Module):
     def run(self):
         #print(self.address, self.data_L, self.data_R)
         if self.data_L is not None:
-            pub.sendMessage("ethernet.send", message = {"type": "CAN", "address": eval(self.address), "data": self.data_L})
+            pub.sendMessage("can.send", message = {"address": eval(self.address), "data": self.data_L})
         
         if self.data_R is not None:
-            pub.sendMessage("ethernet.send", message = {"type": "CAN", "address": eval(self.address), "data": self.data_R})
+            pub.sendMessage("can.send", message = {"address": eval(self.address), "data": self.data_R})
 
     def Listener(self, message):
         self.data_L = EMLRcommand["EM_L"][1 if message["L"] else 0]
@@ -30,7 +30,7 @@ class EM(Module):
 class __Test_Case_Send__(Module):
     def __init__(self):
         super().__init__()
-        pub.subscribe(self.Listener, "ethernet.send")
+        pub.subscribe(self.Listener, "can.send")
 
     def run(self):
         pub.sendMessage("gamepad.EM1", message = {"L": True, "R": False})

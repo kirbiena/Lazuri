@@ -16,11 +16,11 @@ class Gripper(Module):
             self.tool_state = -self.tool_state
             
         if self.tool_state == 1:
-            pub.sendMessage('ethernet.send', message = {"type": "CAN", "address": eval(self.address), "data": [32, self.speed >> 8 & 0xff, self.speed & 0xff]})
+            pub.sendMessage("can.send", message = {"address": eval(self.address), "data": [32, self.speed >> 8 & 0xff, self.speed & 0xff]})
         elif self.tool_state == -1:
-            pub.sendMessage('ethernet.send', message = {"type": "CAN", "address": eval(self.address), "data": [32, -self.speed >> 8 & 0xff, -self.speed & 0xff]})
+            pub.sendMessage("can.send", message = {"address": eval(self.address), "data": [32, -self.speed >> 8 & 0xff, -self.speed & 0xff]})
         else:
-            pub.sendMessage('ethernet.send', message = {"type": "CAN", "address": eval(self.address), "data": [32, 0x00, 0x00]})
+            pub.sendMessage("can.send", message = {"address": eval(self.address), "data": [32, 0x00, 0x00]})
 
     def Listener(self, message):   
         self.tool_state = message["tool_state"]
@@ -28,7 +28,7 @@ class Gripper(Module):
 class __Test_Case_Send__(Module):
     def __init__(self):
         super().__init__()
-        pub.subscribe(self.Listener, "ethernet.send")
+        pub.subscribe(self.Listener, "can.send")
 
     def run(self):
         pub.sendMessage("gamepad.gripper", message = {"extend": False, "retract": True})

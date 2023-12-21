@@ -82,8 +82,7 @@ class CANHandler(Module):
 
             data = msg.data
             data_array = [int.from_bytes(byte, byteorder='big') for byte in data]
-
-            pub.sendMessage("ethernet.send", message = {"type": "CAN", "address": msg.arbitration_id, "data": data_array})
+            print(f"address: {msg.arbitration_id}, data: {data_array}")
 
 if __name__ == "__main__":
     CANHandler = CANHandler(250000)

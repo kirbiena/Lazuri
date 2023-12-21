@@ -72,17 +72,16 @@ class Thrusters(Module):
                     self.output_power[counter] = int(self.output_power[counter]*32767)
                 else:
                     self.output_power[counter] = int(self.output_power[counter]*32768)
-                
-                pub.sendMessage("ethernet.send", message = {"type": "CAN", "address": self.Thrusters[counter]["Address"], "data": [32, self.output_power[counter] >> 8 & 0xff, self.output_power[counter] & 0xff]})
+                pub.sendMessage("can.send", message = {"address": self.Thrusters[counter]["Address"], "data": [32, self.output_power[counter] >> 8 & 0xff, self.output_power[counter] & 0xff]})
                 pub.sendMessage("thrusters.info", message = {"thrusters_output": self.output_power})
 
 
 class __Test_Case_Send__(Module):
     def __init__(self):
         super().__init__()
-        pub.subscribe(self.ethernet_send_listener, "ethernet.send")
+        pub.subscribe(self.can_send_listener, "can.send")
 
-    def ethernet_send_listener(self, message):
+    def can_send_listener(self, message):
         if message["address"] == 21:
             print(message)
 
