@@ -74,11 +74,11 @@ class Joystick(Module):
 
 
         # request from pygame services
-        pygs = PyGameServices()
-        self.joystick = pygs.get_joystick(0)
+        # pygs = PyGameServices()
+        # self.joystick = pygs.get_joystick(0)
 
-        if self.joystick is None:
-            raise TypeError("Joystick not connected")
+        # if self.joystick is None:
+        #     raise TypeError("Joystick not connected")
 
         #Active Tool Modes
         self.active_tool = ""
@@ -155,7 +155,6 @@ class Joystick(Module):
             if button_pressed(self.rb_input):
                 pub.sendMessage(self.active_tool, message = self.em_message(-1))
                 pub.sendMessage("gamepad.em_states", message = self.em_states)
-
     def listener(self, message):
         self.direct_input = message
         pub.sendMessage("gamepad.direct", message = {"gamepad_direct": self.direct_input}) # For GUI Tuple (LLR, LUD, RLR, RUD, BL, BR)
@@ -199,35 +198,36 @@ class Joystick(Module):
         # self.north_input = [self.north_input[0], hat_mapping(self.joystick.get_hat(0))[2]]
         # self.south_input = [self.south_input[0], hat_mapping(self.joystick.get_hat(0))[3]]
 
-        if button_pressed(self.l_stick_input):
-            self.thumb_profile_cycle = (self.thumb_profile_cycle-1)%len(ProfileChars)
-            pub.sendMessage("gamepad.profile", message = {"gamepad_profile": ProfileChars[self.thumb_profile_cycle]})
-        if button_pressed(self.r_stick_input):
-            self.thumb_profile_cycle = (self.thumb_profile_cycle+1)%len(ProfileChars)
-            pub.sendMessage("gamepad.profile", message = {"gamepad_profile": ProfileChars[self.thumb_profile_cycle]})
+        # if button_pressed(self.l_stick_input):
+        #     self.thumb_profile_cycle = (self.thumb_profile_cycle-1)%len(ProfileChars)
+        #     pub.sendMessage("gamepad.profile", message = {"gamepad_profile": ProfileChars[self.thumb_profile_cycle]})
+        # if button_pressed(self.r_stick_input):
+        #     self.thumb_profile_cycle = (self.thumb_profile_cycle+1)%len(ProfileChars)
+        #     pub.sendMessage("gamepad.profile", message = {"gamepad_profile": ProfileChars[self.thumb_profile_cycle]})
 
-        if button_pressed(self.x_input):
-            self.control_invert = not self.control_invert
-            pub.sendMessage("gamepad.invert", message = {"gamepad_invert": self.control_invert}) # For GUI
+        # if button_pressed(self.x_input):
+        #     self.control_invert = not self.control_invert
+        #     pub.sendMessage("gamepad.invert", message = {"gamepad_invert": self.control_invert}) # For GUI
 
-        if button_pressed(self.a_input):
-            self.a_counter += 1
-            pub.sendMessage("gamepad.transect", message = {"gamepad_transect": int(self.a_counter % 2)})
+        # if button_pressed(self.a_input):
+        #     self.a_counter += 1
+        #     pub.sendMessage("gamepad.transect", message = {"gamepad_transect": int(self.a_counter % 2)})
 
-        if button_pressed(self.north_input):
-            self.change_active_tool(0)
+        # if button_pressed(self.north_input):
+        #     self.change_active_tool(0)
 
-        if button_pressed(self.west_input):
-            self.change_active_tool(1)
+        # if button_pressed(self.west_input):
+        #     self.change_active_tool(1)
 
-        if button_pressed(self.east_input):
-            self.change_active_tool(2)
+        # if button_pressed(self.east_input):
+        #     self.change_active_tool(2)
 
-        if button_pressed(self.south_input):
-            self.change_active_tool(3)
+        # if button_pressed(self.south_input):
+        #     self.change_active_tool(3)
 
-        if self.active_tool:
-            self.tool_action()
+        # if self.active_tool:
+        #     self.tool_action()
+        pass
             
         
 

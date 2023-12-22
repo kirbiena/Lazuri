@@ -3,6 +3,7 @@ from ModuleBase import ModuleManager
 from PyGameServices import PyGameServices
 
 # MODULES
+from CANHandler import CANHandler
 from GUI import GUI
 from Joystick import Joystick
 from ControlProfile import ControlProfile
@@ -25,6 +26,7 @@ pygs.start(100)
 pygame = pygs.get_pygame()
 
 GUI = GUI()
+CANHandler = CANHandler(250000)
 Joystick = Joystick()
 Movement = Movement()
 ControlProfileA = ControlProfile(100, 30, "A")

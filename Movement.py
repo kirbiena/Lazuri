@@ -6,12 +6,13 @@ class Movement(Module):
     # up and down speed caps at 2?
     #rest caps at 1, should cap
     steps = [
-    ("UP", 2, 2),
+    ("UP", 2, 20),
     ("DOWN", 2, 2),
     ("STRAFEL",1,2),
     ("STRAFER",1,2),
     ("FORWARD", 1, 2),
     ("BACKWARD", 0.5, 2),
+    ("END")
              ]
     def __init__(self):
         super().__init__()
@@ -34,6 +35,7 @@ class Movement(Module):
                     pub.sendMessage("joystick.movement", message = [0,0,0,0,i[1],0])
                 case _:
                     pub.sendMessage("joystick.movement", message = [0,0,0,0,0,0])
+                    time.sleep(99999)
             time.sleep(i[2])
 
 
