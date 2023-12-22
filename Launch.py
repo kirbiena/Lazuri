@@ -11,6 +11,7 @@ from Thrusters import Thrusters
 from Logger import Logger
 from EM import EM
 from Gripper import Gripper
+from Movement import Movement
 import os
 import time 
 
@@ -25,6 +26,7 @@ pygame = pygs.get_pygame()
 
 GUI = GUI()
 Joystick = Joystick()
+Movement = Movement()
 ControlProfileA = ControlProfile(100, 30, "A")
 ControlProfileB = ControlProfile(70, 50, "B")
 ControlProfileC = ControlProfile(50, 50, "C")
@@ -50,6 +52,7 @@ mm.register(
             (EM1, 5),
             (EM2, 5),
             (Gripper, 10),
+            (Movement, 60)
             # (TestEthernetHandler, 15),
 )
 
