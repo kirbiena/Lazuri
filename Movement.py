@@ -8,15 +8,12 @@ class Movement(Module):
     steps = [
     ("UP", 2, 2),
     ("DOWN", 2, 2),
-    ("STRAFEL",1,2),
-    ("STRAFER",1,2),
-    ("FORWARD", 1, 2),
     ("BACKWARD", 0.5, 2),
              ]
     def __init__(self):
         super().__init__()
 
-    def run(self):
+    def run_once_in_thread(self):
         #print(self.address, self.data_L, self.data_R)
         for i in self.steps:
             starttime = time.time()
@@ -36,5 +33,6 @@ class Movement(Module):
                         pub.sendMessage("joystick.movement", message = [0,0,0,0,i[1],0])
                     case _:
                         pub.sendMessage("joystick.movement", message = [0,0,0,0,0,0])
+            pub.sendMessage("joystick.movement", message = [0,0,0,0,0,0])    
 
 
